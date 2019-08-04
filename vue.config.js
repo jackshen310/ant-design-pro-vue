@@ -8,6 +8,7 @@ function resolve (dir) {
 
 // vue.config.js
 const vueConfig = {
+  publicPath: 'http://localhost:9096/', // 这里暂时写死端口，后续可优化
   configureWebpack: {
     plugins: [
       // Ignore all locale files of moment.js
@@ -34,6 +35,33 @@ const vueConfig = {
       .options({
         name: 'assets/[name].[hash:8].[ext]'
       })
+
+      if (!process.env.VUE_APP_SINGLE_SPA) {
+        return;
+      }
+      // 如下为针对spa的特殊配置
+      // 详细配置参考：https://github.com/neutrinojs/webpack-chain
+      // 1. 增加store入口
+      config
+        .entry('store')
+        .add('./src/single-spa/Store.js')
+        .end();
+    
+      // 2. 修改output的library和libraryTarget
+      config.output
+        .library('app')
+        .libraryTarget('amd')
+        .end();
+
+      // 3. 公共依赖抽取，因为在主项目中已经加载了
+      config.externals({
+        vue: 'vue',
+        'vue-router': 'vue-router'
+      });
+      // 4. 删除alias中的vue$，否则路由会失效
+      config.resolve.alias.delete('vue$');
+
+      console.log('webpackconfig', config.toConfig());
   },
 
   css: {
@@ -41,7 +69,6 @@ const vueConfig = {
       less: {
         modifyVars: {
           // less vars，customize ant design theme
-
           // 'primary-color': '#F5222D',
           // 'link-color': '#F5222D',
           // 'border-radius-base': '4px'
@@ -53,7 +80,7 @@ const vueConfig = {
 
   devServer: {
     // development server port 8000
-    port: 8000
+    port: 9096
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
     // proxy: {
     //   '/api': {

@@ -7,6 +7,10 @@ module.exports = {
         'useBuiltIns': 'entry'
       }
     ]
+  ],
+  "plugins": [
+    "@babel/transform-runtime",
+    "@babel/plugin-proposal-class-properties",
   ]
   // if your use import on Demand, Use this code
   // ,

@@ -1,6 +1,6 @@
 <template>
   <a-locale-provider :locale="locale">
-    <div id="app">
+    <div id="app-ant-design-pro-vue">
       <router-view/>
     </div>
   </a-locale-provider>
@@ -23,7 +23,7 @@ export default {
 }
 </script>
 <style>
-  #app {
+  #app-ant-design-pro-vue {
     height: 100%;
   }
 </style>

@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve --port 9096",
+    "dev:spa": "cross-env VUE_APP_SINGLE_SPA=true vue-cli-service serve --port 9096 --mode single-spa",
     "build": "vue-cli-service build",
     "build:preview": "vue-cli-service build --mode preview",
     "lint": "vue-cli-service lint",
@@ -24,6 +25,7 @@
     "mockjs2": "^1.0.5",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",
+    "single-spa-vue": "^1.5.4",
     "viser-vue": "^2.3.3",
     "vue": "^2.5.22",
     "vue-clipboard2": "^0.2.1",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "@ant-design/colors": "^3.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/polyfill": "^7.2.5",
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
@@ -48,6 +51,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-plugin-import": "^1.11.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.8.0",
     "eslint-plugin-html": "^5.0.0",
     "eslint-plugin-vue": "^5.0.0",

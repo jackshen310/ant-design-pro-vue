@@ -7,7 +7,7 @@ export const asyncRouterMap = [
   {
     path: '/',
     name: 'index',
-    component: BasicLayout,
+    component: process.env.VUE_APP_SINGLE_SPA ? BlankLayout : BasicLayout,
     meta: { title: '首页' },
     redirect: '/dashboard/workplace',
     children: [
@@ -154,7 +154,7 @@ export const asyncRouterMap = [
         name: 'result',
         component: PageView,
         redirect: '/result/success',
-        meta: { title: '结果页', icon: 'check-circle-o', permission: [ 'result' ] },
+        meta: { title: '结果页', icon: 'check-circle-o', permission: ['result'] },
         children: [
           {
             path: '/result/success',
@@ -318,10 +318,11 @@ export const asyncRouterMap = [
         ]
       }
     ]
-  },
-  {
-    path: '*', redirect: '/404', hidden: true
   }
+  // FIXME,这里不能加，会造成路由覆盖，导致打开其它vue应用时会一直重定向到404页面
+  // {
+  //   path: '*', redirect: '/404', hidden: true
+  // }
 ]
 
 /**
